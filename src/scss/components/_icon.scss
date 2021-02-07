@@ -1,0 +1,13 @@
+.icon {
+  &.white {
+    svg path {
+      fill: $white;
+    }
+  }
+
+  &.black {
+    svg path {
+      fill: $black;
+    }
+  }
+}
