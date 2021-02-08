@@ -6,7 +6,7 @@ import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
-    <main>
+    <main className="main">
       <HashRouter>
         <Switch>
           <Route exact path="/" component={HomePage} />
