@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button";
 
 const Autocomplete = ({
-  suggestions,
+  suggestions = [],
   getSuggestion,
   noDataText = "",
   leftIconName = "",
@@ -43,7 +43,7 @@ const Autocomplete = ({
       showOptions: false,
       userInput,
     });
-    getSuggestion(userInput);
+    getSuggestion && getSuggestion(userInput);
   };
 
   const onKeyUp = (e) => {
@@ -60,7 +60,7 @@ const Autocomplete = ({
           showOptions: false,
           userInput: selected || userInput,
         });
-        getSuggestion(selected || userInput);
+        getSuggestion && getSuggestion(selected || userInput);
       } else {
         setError("Searched phrase can't be empty :).");
         setState({
@@ -89,7 +89,7 @@ const Autocomplete = ({
   };
 
   const handleClick = () => {
-    getSuggestion(state.userInput);
+    getSuggestion && getSuggestion(state.userInput);
   };
 
   let optionList;
