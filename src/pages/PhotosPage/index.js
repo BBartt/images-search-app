@@ -36,7 +36,7 @@ function PhotosPage() {
   const suggestions = useSelector((state) => state.suggestions);
 
   useEffect(() => {
-    dispatch(getPhotos(photoName, 50));
+    dispatch(getPhotos(photoName, 100));
     return () => dispatch(savePhotosSuccess([]));
   }, [photoName, dispatch]);
 
