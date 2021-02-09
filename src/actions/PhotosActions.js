@@ -15,10 +15,10 @@ export const fetchPhotosFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
-export const getPhotos = (photoName) => (dispatch) => {
+export const getPhotos = (photoName, pageItems) => (dispatch) => {
   dispatch(fetchPhotosStart());
   photosApi
-    .getPhotos(photoName)
+    .getPhotos(photoName, pageItems)
     .then((res) => {
       dispatch(savePhotosSuccess(res.data.results));
     })

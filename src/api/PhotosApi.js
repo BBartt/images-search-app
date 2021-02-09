@@ -4,6 +4,8 @@ export const photosApi = {
   getPhotos,
 };
 
-function getPhotos(photoName) {
-  return API.get("/search/photos", { params: { query: photoName } });
+function getPhotos(photoName, pageItems) {
+  return API.get("/search/photos", {
+    params: { query: photoName, per_page: pageItems },
+  });
 }
