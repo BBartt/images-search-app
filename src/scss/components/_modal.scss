@@ -1,0 +1,95 @@
+.ReactModal__Overlay {
+  z-index: 10;
+}
+
+.modal-overlay {
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+
+  .modal {
+    box-shadow: 0 10px 20px rgba($black, 0.19), 0 6px 6px rgba($black, 0.23);
+    background: $white;
+
+    position: absolute;
+    z-index: 10;
+    top: 70px;
+
+    min-height: 80%;
+    width: 80%;
+
+    &-head {
+      .button.icon {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+
+        border: 1px solid $black;
+        border-radius: 50%;
+        padding: 9px 9px 5px;
+        background: $white;
+      }
+      .author {
+        margin-left: 20px;
+        margin-top: 20px;
+        &-name {
+          display: flex;
+          flex-direction: column;
+
+          color: $black;
+
+          span {
+            &:first-child {
+              font-size: 1.9rem;
+            }
+            &:last-child {
+              font-size: 1.1rem;
+            }
+          }
+        }
+      }
+    }
+
+    &-content {
+      padding: 50px;
+      .img {
+        border-radius: 5px;
+        width: 100%;
+      }
+    }
+
+    &-foot {
+      .location {
+        &-name {
+          margin-bottom: 10px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  &::before {
+    content: "";
+    position: fixed;
+    z-index: 10;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+
+  .user-image {
+  }
+}

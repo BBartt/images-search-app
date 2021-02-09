@@ -1,0 +1,15 @@
+.author {
+  display: flex;
+  align-items: center;
+
+  color: $white;
+
+  &-img {
+    border-radius: 50%;
+  }
+  &-name {
+    text-decoration: none;
+    margin-left: 10px;
+    color: $white;
+  }
+}

@@ -26,3 +26,29 @@ export const getPhotos = (photoName, pageItems) => (dispatch) => {
       dispatch(fetchPhotosFailure(err));
     });
 };
+
+export const fetchPhotoStart = () => ({
+  type: types.FETCH_PHOTO_START,
+});
+
+export const savePhotoSuccess = (data) => ({
+  type: types.FETCH_PHOTO_SUCCESS,
+  payload: data,
+});
+
+export const fetchPhotoFailure = (errorMessage) => ({
+  type: types.FETCH_PHOTO_FAILURE,
+  payload: errorMessage,
+});
+
+export const getPhoto = (id) => (dispatch) => {
+  dispatch(fetchPhotoStart());
+  photosApi
+    .getPhoto(id)
+    .then((res) => {
+      dispatch(savePhotoSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(fetchPhotoFailure(err));
+    });
+};

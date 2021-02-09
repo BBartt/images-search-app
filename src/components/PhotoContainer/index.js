@@ -1,29 +1,33 @@
 import React from "react";
 
-function PhotoContainer({ photoUrls, photoAlt, author }) {
+import { useDispatch } from "react-redux";
+
+import { getPhoto } from "../../actions/PhotosActions";
+
+import Author from "../Author";
+
+function PhotoContainer({ photoUrls, photoAlt, author, photoId, showModal }) {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(getPhoto(photoId));
+    showModal();
+  };
+
   return (
-    <figure className="photo-container">
+    <figure className="photo-container" onClick={handleClick}>
       <img
         className="img"
         src={photoUrls.regular || photoUrls.raw}
         alt={photoAlt}
       />
       <div className="overlay">
-        <figcaption className="author">
-          <img
-            className="author-img"
-            src={author?.profile_image?.small || author?.profile_image?.medium}
-            alt={author?.name}
-          />
-          <a
-            target="_blank"
-            rel="noreferrer"
-            className="author-name"
-            href={author?.links?.html}
-          >
-            {author?.name}
-          </a>
-        </figcaption>
+        <Author
+          imgSrc={author?.profile_image?.small}
+          imgAlt={author?.name}
+          linkHref={author?.links?.html}
+          linkName={author?.name}
+        />
       </div>
     </figure>
   );

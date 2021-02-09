@@ -21,20 +21,6 @@
       bottom: 20px;
       left: 20px;
       z-index: 5;
-
-      display: flex;
-      align-items: center;
-
-      color: $white;
-
-      &-img {
-        border-radius: 50%;
-      }
-      &-name {
-        text-decoration: none;
-        margin-left: 10px;
-        color: $white;
-      }
     }
 
     &::after {
