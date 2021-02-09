@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useHistory, Link } from "react-router-dom";
 
+import Masonry from "react-masonry-css";
+
 import { getPhotos, savePhotosSuccess } from "../../actions/PhotosActions";
 
 import Autocomplete from "../../components/Autocomplete";
@@ -20,7 +22,7 @@ function PhotosPage() {
   const photos = useSelector((state) => state.photos);
 
   useEffect(() => {
-    dispatch(getPhotos(photoName));
+    dispatch(getPhotos(photoName, 50));
 
     return () => dispatch(savePhotosSuccess([]));
   }, [photoName, dispatch]);
@@ -31,6 +33,13 @@ function PhotosPage() {
     },
     [history]
   );
+
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1,
+  };
 
   return (
     <div className="photos-page">
@@ -53,15 +62,21 @@ function PhotosPage() {
         </div>
       </header>
       <div className="content">
-        {photos.data.length > 0 &&
-          photos.data.map((photo) => (
-            <PhotoContainer
-              key={photo.id}
-              photoUrls={photo?.urls}
-              photoAlt={photo?.alt_description}
-              author={photo?.user}
-            />
-          ))}
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {photos.data.length > 0 &&
+            photos.data.map((photo) => (
+              <PhotoContainer
+                key={photo.id}
+                photoUrls={photo?.urls}
+                photoAlt={photo?.alt_description}
+                author={photo?.user}
+              />
+            ))}
+        </Masonry>
 
         {photos.data.length === 0 && !photos.loading && <div>No photos :(</div>}
 

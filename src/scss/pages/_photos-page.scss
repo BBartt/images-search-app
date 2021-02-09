@@ -9,7 +9,6 @@
       a {
         text-align: center;
       }
-
       .h1 {
         font-size: 6rem;
       }
@@ -21,8 +20,19 @@
     }
   }
   .content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    margin: 0px auto;
+    width: 80%;
+
+    .my-masonry-grid {
+      &_column {
+        .photo-container {
+          margin: 10px;
+        }
+      }
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 }
