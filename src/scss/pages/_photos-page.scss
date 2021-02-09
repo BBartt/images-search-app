@@ -1,6 +1,28 @@
 .photos-page {
-  .autocomplete-component {
-    width: 80%;
-    margin: 0 auto;
+  .header {
+    margin: 40px 0px;
+
+    div:first-child {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-evenly;
+      a {
+        text-align: center;
+      }
+
+      .h1 {
+        font-size: 6rem;
+      }
+      .autocomplete-component {
+        width: 80%;
+      }
+    }
+    div:last-child {
+    }
+  }
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
   }
 }
