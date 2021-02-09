@@ -8,14 +8,19 @@ function PhotoContainer({ photoUrls, photoAlt, author }) {
         src={photoUrls.regular || photoUrls.raw}
         alt={photoAlt}
       />
-      <div class="overlay">
+      <div className="overlay">
         <figcaption className="author">
           <img
             className="author-img"
             src={author?.profile_image?.small || author?.profile_image?.medium}
             alt={author?.name}
           />
-          <a target="_blank" className="author-name" href={author?.links?.html}>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            className="author-name"
+            href={author?.links?.html}
+          >
             {author?.name}
           </a>
         </figcaption>

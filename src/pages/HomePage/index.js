@@ -20,7 +20,7 @@ function HomePage() {
   return (
     <div className="home-page">
       <section className="search-section">
-        <h1>Unsplash</h1>
+        <h1>Images search app</h1>
         <p>
           The internet's source of{" "}
           <a
@@ -28,9 +28,8 @@ function HomePage() {
             target="_blank"
             href="https://unsplash.com/license"
           >
-            freely-usable images
+            freely-usable images.
           </a>
-          .
         </p>
         <p>Powered by creators everywhere.</p>
         <Autocomplete

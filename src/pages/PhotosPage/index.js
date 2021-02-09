@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useHistory, Link } from "react-router-dom";
 
-import { getPhotos } from "../../actions/PhotosActions";
+import { getPhotos, savePhotosSuccess } from "../../actions/PhotosActions";
 
 import Autocomplete from "../../components/Autocomplete";
 import PhotoContainer from "../../components/PhotoContainer";
@@ -19,7 +19,11 @@ function PhotosPage() {
 
   const photos = useSelector((state) => state.photos);
 
-  useEffect(() => dispatch(getPhotos(photoName)), [photoName, dispatch]);
+  useEffect(() => {
+    dispatch(getPhotos(photoName));
+
+    return () => dispatch(savePhotosSuccess([]));
+  }, [photoName, dispatch]);
 
   const onSearch = useCallback(
     (photo) => {
@@ -49,7 +53,7 @@ function PhotosPage() {
         </div>
       </header>
       <div className="content">
-        {photos.data.length > 0 ? (
+        {photos.data.length > 0 &&
           photos.data.map((photo) => (
             <PhotoContainer
               key={photo.id}
@@ -57,10 +61,9 @@ function PhotosPage() {
               photoAlt={photo?.alt_description}
               author={photo?.user}
             />
-          ))
-        ) : (
-          <div>No photos :(</div>
-        )}
+          ))}
+
+        {photos.data.length === 0 && !photos.loading && <div>No photos :(</div>}
 
         {photos.loading && <div>Loading...</div>}
       </div>
