@@ -7,6 +7,9 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import Masonry from "react-masonry-css";
 
 import { getPhotos, savePhotosSuccess } from "../../actions/PhotosActions";
+import { getSuggestions } from "../../actions/SuggestionsActions";
+
+import { getQuery } from "../../utils";
 
 import Autocomplete from "../../components/Autocomplete";
 import PhotoContainer from "../../components/PhotoContainer";
@@ -20,10 +23,10 @@ function PhotosPage() {
   const history = useHistory();
 
   const photos = useSelector((state) => state.photos);
+  const suggestions = useSelector((state) => state.suggestions);
 
   useEffect(() => {
     dispatch(getPhotos(photoName, 50));
-
     return () => dispatch(savePhotosSuccess([]));
   }, [photoName, dispatch]);
 
@@ -49,10 +52,17 @@ function PhotosPage() {
             <Icon name="home" />
             <div>GO HOME</div>
           </Link>
-
           <Autocomplete
             defaultValue={photoName}
+            suggestions={
+              suggestions.data?.autocomplete?.length > 0
+                ? getQuery(suggestions.data.autocomplete)
+                : []
+            }
             getSuggestion={(suggestion) => onSearch(suggestion)}
+            getLetters={(letters) =>
+              letters.length >= 3 && dispatch(getSuggestions(letters))
+            }
             leftIconName="magnifying_glass"
             rightIconName="close"
           />

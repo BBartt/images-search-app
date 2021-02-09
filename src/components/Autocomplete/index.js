@@ -4,6 +4,7 @@ import Button from "../Button";
 const Autocomplete = ({
   suggestions = [],
   getSuggestion,
+  getLetters,
   noDataText = "",
   leftIconName = "",
   leftIconColor = "",
@@ -21,18 +22,12 @@ const Autocomplete = ({
 
   const onChange = (e) => {
     const userInput = e.currentTarget.value;
-
-    const filteredOptions = suggestions?.filter(
-      (suggestion) =>
-        suggestion?.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
-
     setState({
-      activeOption: -1,
-      filteredOptions,
+      ...state,
       showOptions: true,
       userInput,
     });
+    getLetters && getLetters(userInput);
   };
 
   const onSelectOption = (e) => {
@@ -47,10 +42,21 @@ const Autocomplete = ({
   };
 
   const onKeyUp = (e) => {
+    setError(noDataText);
     const { activeOption, filteredOptions } = state;
     const userInput = e.target.value;
     const selected = userInput.length > 0 && filteredOptions[activeOption];
-    setError(noDataText);
+
+    const filtered = suggestions?.filter(
+      (suggestion) =>
+        suggestion?.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+    );
+    setState({
+      activeOption: -1,
+      filteredOptions: filtered,
+      showOptions: true,
+      userInput,
+    });
 
     if (e.keyCode === 13) {
       if (userInput.length > 0) {

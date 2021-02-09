@@ -1,5 +1,10 @@
 import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+import { getSuggestions } from "../../actions/SuggestionsActions";
+
+import { getQuery } from "../../utils";
 
 import routes from "../../routes";
 
@@ -7,6 +12,8 @@ import Autocomplete from "../../components/Autocomplete";
 
 function HomePage() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const suggestions = useSelector((state) => state.suggestions);
 
   const { photos } = routes;
 
@@ -33,10 +40,17 @@ function HomePage() {
         </p>
         <p>Powered by creators everywhere.</p>
         <Autocomplete
-          suggestions={["red", "white", "blue", "lorem ipsum", "lorem"]}
+          suggestions={
+            suggestions.data?.autocomplete?.length > 0
+              ? getQuery(suggestions.data.autocomplete)
+              : []
+          }
           getSuggestion={(suggestion) => {
             onSearch(suggestion);
           }}
+          getLetters={(letters) =>
+            letters.length >= 3 && dispatch(getSuggestions(letters))
+          }
           leftIconName="magnifying_glass"
           rightIconName="close"
         />
